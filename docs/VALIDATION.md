@@ -24,3 +24,12 @@
 - 审核的公开候选文件仅包括网站源码、锁文件、文档、测试、模板、工作流和八件作品占位条目；public 仅有 favicon 与空图库标记。
 - 常见凭据、私钥、带密码 URL、个人本机绝对路径模式扫描未发现命中；不将此扫描视为对未来新增素材的隐私保证。
 - .env、private、raw、node_modules、dist、zip 均不进入待提交清单。完整公开审核仍需由本人在首次上传前完成。
+
+## 绘画与摄影整合复查
+
+- 本人确认 17 个图片文件的公开标题与分类；15 件 Digital Art、2 件 Photography & Others，总共 22 件作品、26 个静态页面。
+- 更新保留 Dogma、Butterfly、Maggots of Brain 的原 slug；Butterfly 的显示标题改为 Happiness is a butterfly。
+- 51 张公开 WebP 校验通过：原图方向修正后比例不变、无放大、无 EXIF/XMP/ICC 元数据；原始 17 个文件 SHA-256 前后一致。含 ICC 的源像素先转为 sRGB。
+- pnpm test：5/5 通过；pnpm build：26 页、312 个本地引用，类型检查 0 errors/warnings/hints；git diff --check 通过。
+- 浏览器验证：Digital Art 筛选 15/22；Dogma 主图与 1714×4096 高清副本加载正常；Escape 关闭后焦点返回原链接；390px 移动端 Butterfly 显示完整比例，无横向溢出。
+- 原始 PNG/JPG/HEIC 和转换中的临时文件均留在网站仓库之外，public 中仅新增 WebP 展示副本；未 commit 或 push。

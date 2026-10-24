@@ -21,10 +21,12 @@ const projects = defineCollection({
   status: z.enum(['concept','in-progress','completed','archived']).nullable().default(null),
   visibility: z.literal('public'), featured: z.boolean().default(false),
   cover: localImage.optional(), coverAlt: z.string().min(1).optional(),
+  thumbnail: localImage.optional(), fullImage: localImage.optional(),
+  coverWidth: z.number().int().positive().optional(), coverHeight: z.number().int().positive().optional(),
   gallery: z.array(z.object({src: localImage, alt: z.string().min(1), caption: z.string().optional()})).default([]),
   description: z.string().min(1), repositoryUrl: url.optional(), demoUrl: url.optional(),
   version: z.string().optional(), placeholder: z.boolean().default(false),
   changelog: z.array(z.object({date, text: z.string().min(1)})).default([])
- }).superRefine((d,c)=>{if(d.cover&&!d.coverAlt)c.addIssue({code:'custom',message:'封面需要 coverAlt'});if(d.updated&&d.date&&d.updated<d.date)c.addIssue({code:'custom',message:'updated 不能早于 date'});})
+ }).superRefine((d,c)=>{if((d.thumbnail||d.fullImage)&&!d.cover)c.addIssue({code:'custom',message:'高清图和缩略图需要 cover'});if(Boolean(d.coverWidth)!==Boolean(d.coverHeight))c.addIssue({code:'custom',message:'coverWidth 与 coverHeight 必须成对填写'});if(d.cover&&!d.coverAlt)c.addIssue({code:'custom',message:'封面需要 coverAlt'});if(d.updated&&d.date&&d.updated<d.date)c.addIssue({code:'custom',message:'updated 不能早于 date'});})
 });
 export const collections = { projects };

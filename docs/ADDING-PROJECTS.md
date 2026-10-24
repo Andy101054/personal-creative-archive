@@ -77,3 +77,9 @@ MDX 内自己写的 `<img>`、HTML、组件以及 HTML 原始标签不能由 Mar
 ## 扩展分类
 
 新增作品不需改组件。只有新增分类时，在 `src/content.config.ts` 的 category 枚举与 `src/lib/archive.ts` 的 categories 映射各加一项。新增状态同理。保持现有值稳定，迁移时一次性更新受影响条目。
+
+## 公开绘画的多尺寸展示图
+
+可选字段 `thumbnail`（列表缩略图）、`fullImage`（高清网页副本）、`coverWidth` / `coverHeight`（封面实际像素尺寸，必须成对填写）支持纵幅、横幅与方幅。`cover` 用于详情页；未提供 thumbnail 时列表仍使用 cover。所有路径遵循相同的本地图片验证。Digital Art 与 Photography & Others 的列表图片采用 contain，保留完整画面；点击详情页主图放大，并可打开高清网页副本使用浏览器原生缩放。
+
+本次图片只提交重新编码、清理 EXIF/GPS 的 WebP 副本，不提交原始 JPG/PNG/HEIC 或工程文件。文件时间不能充当创作日期；未知的日期、状态、背景和工具继续留空。作品正文可先不填写，不需要保留“待补充”的虚构段落。

@@ -12,6 +12,10 @@ placeholder: true
 description: "一两句话说明作品；尚不清楚的信息不要猜测。"
 # cover: /images/your-project/cover.webp
 # coverAlt: "准确描述封面内容"
+# coverWidth: 1200 # 实际封面像素，与 coverHeight 成对填写
+# coverHeight: 800
+# thumbnail: /images/your-project/thumb.webp
+# fullImage: /images/your-project/full.webp
 gallery: []
 # repositoryUrl: https://github.com/USERNAME/PROJECT
 # demoUrl: https://example.com/play

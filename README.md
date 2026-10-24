@@ -32,7 +32,7 @@ pnpm preview    # 预览 dist，默认 http://127.0.0.1:4321/personal-creative-a
 - 页标题、描述、Open Graph、配置生产域名后的 canonical；语义 HTML、跳过导航、图片替代文字、键盘焦点、减少动态效果支持。
 - GitHub Actions 检查和 Pages 部署。Pull request 仅检查，main 推送部署。
 
-初始八个条目是**明确标注的占位档案**。不包含虚构截图、日期、版本、实验结果、开发细节或公开链接。初始精选仅是可修改的编排示例。`date/status: null` 表示待补充；最近更新为空时会如实显示。没有外部字体、追踪器、后端或数据库。
+当前包含 **15 件 Digital Art、2 件摄影作品，以及 5 件游戏/编程占位档案**。绘画和摄影使用本人选择的公开图片重新编码的 WebP 副本，原始文件不进入仓库。占位项目仍明确标记，不包含虚构截图、日期、版本、实验结果、开发细节或公开链接。精选可修改。`date/status: null` 表示待补充；最近更新为空时会如实显示。没有外部字体、追踪器、后端或数据库。
 
 ## 架构与目录
 
@@ -62,7 +62,7 @@ tests/                      # 有实际行为断言的测试
 ## 开始维护
 
 1. 在 `src/config.ts` 补充个人简介和公开 GitHub 地址；更完整的 About 正文在 `src/pages/about.astro`。
-2. 按 [添加作品教程](docs/ADDING-PROJECTS.md) 复制模板并放入展示素材。
+2. 按 [添加作品教程](docs/ADDING-PROJECTS.md) 复制模板并放入展示素材；已有绘画与摄影的对应关系见 [图片整合记录](docs/ARTWORKS.md)。
 3. 阅读 [仓库组织与私人档案](docs/ARCHITECTURE-PRIVACY.md)，将原始资料放在网站仓库以外。
 4. 执行测试与构建；按 [GitHub Pages 部署教程](docs/DEPLOYMENT.md) 连接远程仓库。
 
