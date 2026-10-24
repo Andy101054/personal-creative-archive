@@ -1,0 +1,28 @@
+---
+import '../styles/global.css';
+import { href } from '../lib/archive';
+import { profile } from '../config';
+interface Props { title?: string; description?: string; }
+const {title, description=profile.intro}=Astro.props;
+const current=Astro.url.pathname;
+const canonical=Astro.site ? new URL(current, Astro.site) : undefined;
+---
+<!doctype html><html lang="zh-CN"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width"/>
+<title>{title ? `${title} · ${profile.name}` : profile.name}</title><meta name="description" content={description}/>
+{canonical && <link rel="canonical" href={canonical}/>}
+<meta property="og:title" content={title || profile.name}/><meta property="og:description" content={description}/><meta property="og:type" content="website"/>{canonical&&<meta property="og:url" content={canonical}/>}
+<meta name="color-scheme" content="dark light"/><link rel="icon" href={href('favicon.svg')} type="image/svg+xml"/>
+<script is:inline>try{const t=localStorage.getItem('theme');document.documentElement.dataset.theme=t==='light'?'light':'dark'}catch{}</script>
+</head><body>
+<a class="skip" href="#main">跳至内容</a>
+<header class="site-header wrap"><a class="brand" href={href()} aria-label="Creative Archive 首页"><span class="brand-mark">✳</span> CREATIVE ARCHIVE<span class="brand-sub">A PERSONAL COLLECTION</span></a>
+<nav aria-label="主导航">{[['','首页'],['archive/','档案馆'],['about/','关于']].map(([path,label])=><a href={href(path)} aria-current={current===href(path)?'page':undefined}>{label}</a>)}<button id="theme" class="theme" aria-label="切换至浅色主题" type="button">◐</button></nav></header>
+<main id="main" class="wrap"><slot/></main>
+<footer class="wrap"><span>持续创作，持续收藏。<small>AN EVOLVING ARCHIVE, ALWAYS.</small></span><a href={href('archive/')}>探索全部作品 ↗</a></footer>
+<script>
+ const button=document.querySelector<HTMLButtonElement>('#theme')!;
+ const sync=()=>{button.setAttribute('aria-label',`切换至${document.documentElement.dataset.theme==='light'?'深':'浅'}色主题`)};
+ sync();button.addEventListener('click',()=>{const t=document.documentElement.dataset.theme==='light'?'dark':'light';document.documentElement.dataset.theme=t;try{localStorage.setItem('theme',t)}catch{}sync()});
+</script>
+</body></html>

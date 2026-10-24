@@ -1,0 +1,5 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {matches,compareProjects} from '../src/lib/filter.mjs';
+const d={title:'Alien',search:'alien 语言破译',date:'2024-02-01',category:'game-development',status:'in-progress',tags:'["语言破译"]'};
+test('combined filters and case insensitive search',()=>{assert.ok(matches(d,{q:'ALIEN',category:'game-development',status:'in-progress',year:'2024',tag:'语言破译'}));for(const f of [{q:'unknown'},{category:'programming'},{tag:'语言'},{year:'2023'},{status:'completed'}])assert.equal(matches(d,f),false)});
+test('unknown dates remain last in either date order',()=>{const u={...d,date:''};for(const sort of ['newest','oldest'])assert.ok(compareProjects(u,d,sort)>0);assert.ok(matches(u,{year:'unknown'}));assert.equal(matches(d,{year:'unknown'}),false)});
+test('date ordering and title fallback',()=>{const later={...d,date:'2025-01-01'};assert.ok(compareProjects(d,later,'newest')>0);assert.ok(compareProjects(d,later,'oldest')<0);assert.ok(compareProjects(d,{...d,title:'Zebra'},'title')<0)});

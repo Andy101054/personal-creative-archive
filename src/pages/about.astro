@@ -1,0 +1,4 @@
+---
+import Layout from '../layouts/Layout.astro';import {profile} from '../config';
+---
+<Layout title="关于"><section class="page-intro"><p class="eyebrow">BEHIND THE ARCHIVE</p><h1>不止是作品，<br/><em>也是来时的路。</em></h1><p>{profile.about}</p></section><div class="about-grid"><section class="prose"><h2>关于创作者</h2><p>个人介绍待补充。这里将记录创作背景、兴趣，以及正在探索的方向。</p><h2>创作的交汇处</h2><p>游戏开发与设计、编程与算法、数字绘画与摄影。不同媒介之间的尝试，都可以成为档案的一部分。</p><h2>一座开放的档案馆</h2><p>这里收藏的不只是完成品，也包括经过公开整理的构想、实验和开发过程。作品会持续更新，未完成也值得被记录。</p></section><aside class="about-note"><p class="eyebrow">SAY HELLO</p><h2>保持联系</h2>{profile.githubUrl?<a href={profile.githubUrl} rel="noopener noreferrer" target="_blank">GitHub ↗</a>:<p class="muted">公开联系方式待补充。</p>}<p>本站展示公开整理的作品资料；原始文件与私人档案独立保存。</p></aside></div></Layout>
