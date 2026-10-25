@@ -1,13 +1,13 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { categories, statuses, href, dateLabel } from '../lib/archive';
+import { categories, statuses, href, dateLabel, hasDescription } from '../lib/archive';
 interface Props { project: CollectionEntry<'projects'>; index?: number; }
 const {project,index=0}=Astro.props;const d=project.data;
 ---
 <article class="card" data-project data-title={d.title} data-category={d.category} data-tags={JSON.stringify(d.tags)} data-status={d.status||'unknown'} data-date={d.date||''} data-search={[d.title,d.description,categories[d.category],...d.tags].join(' ').toLocaleLowerCase()}>
 <a href={href(`projects/${d.slug}/`)} class="card-link">
 <div class:list={['cover',`tone-${index%4}`, {'preserve-art': ['digital-art','photography-others'].includes(d.category)}]}>
-{d.cover ? <img src={href(d.thumbnail || d.cover)} alt={d.coverAlt} loading="lazy" width={d.coverWidth || 1000} height={d.coverHeight || 700}/> : <div class="cover-type" aria-hidden="true"><span>{d.category==='digital-art'?'ART STUDY':d.category==='programming'?'CODE STUDY':'PLAY STUDY'}</span><strong>{d.title}</strong><span>素材待补充 / PLACEHOLDER</span></div>}
+{d.cover ? <img src={href(d.thumbnail || d.cover)} alt={d.coverAlt} loading="lazy" width={d.coverWidth || 1000} height={d.coverHeight || 700}/> : <div class="cover-type" aria-hidden="true"><span>暂无图片</span></div>}
 <span class="card-arrow" aria-hidden="true">↗</span></div>
-<div class="card-meta"><span>{categories[d.category]}</span><span>{d.date ? dateLabel(d.date) : d.placeholder ? '日期待补充' : ''}</span></div><h3>{d.title}</h3><p>{d.description}</p>{(d.status||d.placeholder)&&<div class="card-bottom"><span class="status"><i></i>{d.status?statuses[d.status]:'状态待确认'}</span>{d.placeholder&&<span>占位条目</span>}</div>}
+<div class="card-meta"><span>{categories[d.category]}</span><span>{d.date ? dateLabel(d.date) : ''}</span></div><h3>{d.title}</h3>{hasDescription(d)&&<p>{d.description}</p>}{(d.status||d.placeholder)&&<div class="card-bottom">{d.status&&<span class="status"><i></i>{statuses[d.status]}</span>}{d.placeholder&&<span>资料待补充</span>}</div>}
 </a></article>

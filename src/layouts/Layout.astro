@@ -16,10 +16,10 @@ const canonical=Astro.site ? new URL(current, Astro.site) : undefined;
 <script is:inline>try{const t=localStorage.getItem('theme');document.documentElement.dataset.theme=t==='light'?'light':'dark'}catch{}</script>
 </head><body>
 <a class="skip" href="#main">跳至内容</a>
-<header class="site-header wrap"><a class="brand" href={href()} aria-label="Creative Archive 首页"><span class="brand-mark">✳</span> CREATIVE ARCHIVE<span class="brand-sub">A PERSONAL COLLECTION</span></a>
+<header class="site-header wrap"><a class="brand" href={href()} aria-label="Creative Archive 首页"><span class="brand-mark">✳</span> CREATIVE ARCHIVE</a>
 <nav aria-label="主导航">{[['','首页'],['archive/','档案馆'],['about/','关于']].map(([path,label])=><a href={href(path)} aria-current={current===href(path)?'page':undefined}>{label}</a>)}<button id="theme" class="theme" aria-label="切换至浅色主题" type="button">◐</button></nav></header>
 <main id="main" class="wrap"><slot/></main>
-<footer class="wrap"><span>持续创作，持续收藏。<small>AN EVOLVING ARCHIVE, ALWAYS.</small></span><a href={href('archive/')}>探索全部作品 ↗</a></footer>
+<footer class="wrap">{profile.githubUrl&&<a href={profile.githubUrl} target="_blank" rel="noopener noreferrer">GitHub ↗</a>}<a href={href('archive/')}>全部作品 ↗</a></footer>
 <script>
  const button=document.querySelector<HTMLButtonElement>('#theme')!;
  const sync=()=>{button.setAttribute('aria-label',`切换至${document.documentElement.dataset.theme==='light'?'深':'浅'}色主题`)};

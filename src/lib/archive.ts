@@ -9,3 +9,7 @@ export async function allProjects() {
  for(const p of items){if(seen.has(p.data.slug))throw new Error(`重复 slug: ${p.data.slug}`);seen.add(p.data.slug);}
  return items.sort((a,b)=>(b.data.date||'').localeCompare(a.data.date||'')||a.data.title.localeCompare(b.data.title));
 }
+
+export function hasDescription(data: {title: string; description: string}) {
+ return ![data.title, `${data.title} · 数字绘画`, `${data.title} · 摄影作品`].includes(data.description.trim());
+}

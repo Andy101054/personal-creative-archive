@@ -2,14 +2,14 @@
 import Layout from '../layouts/Layout.astro';import Card from '../components/Card.astro';import {allProjects,categories,statuses} from '../lib/archive';
 const projects=await allProjects();const tags=[...new Set(projects.flatMap(p=>p.data.tags))].sort();const years=[...new Set(projects.flatMap(p=>p.data.date?[p.data.date.slice(0,4)]:[]))].sort().reverse();
 ---
-<Layout title="档案馆"><section class="page-intro"><p class="eyebrow">THE COLLECTION</p><h1>每一个想法，<br/><em>都值得留存。</em></h1><p>从最初的构想到完成的作品，在这里循迹探索。</p></section>
+<Layout title="档案馆"><section class="page-intro"><h1>档案馆</h1></section>
 <form id="filters" class="filters" role="search" aria-label="筛选档案"><label class="search">搜索作品<input name="q" type="search" placeholder="搜索名称、标签或简介…"/></label><div class="filter-row">
 <label>类别<select name="category"><option value="">全部类别</option>{Object.entries(categories).map(([v,l])=><option value={v}>{l}</option>)}</select></label>
 <label>年份<select name="year"><option value="">全部年份</option>{years.map(y=><option>{y}</option>)}<option value="unknown">日期待补充</option></select></label>
 <label>状态<select name="status"><option value="">全部状态</option>{Object.entries(statuses).map(([v,l])=><option value={v}>{l}</option>)}<option value="unknown">状态待确认</option></select></label>
 <label>标签<select name="tag"><option value="">全部标签</option>{tags.map(t=><option>{t}</option>)}</select></label>
 <label>排序<select name="sort"><option value="newest">创作日期：新 → 旧</option><option value="oldest">创作日期：旧 → 新</option><option value="title">作品名称</option></select></label><button type="reset" class="reset">重置筛选 ↺</button></div></form>
-<div class="results-bar"><p id="count" role="status" aria-live="polite">{projects.length} 件作品</p><span>未知日期始终排在最后</span></div><noscript><p>JavaScript 已关闭：以下展示完整档案，筛选需要 JavaScript。</p></noscript><div class="grid" id="results">{projects.map((p,i)=><Card project={p} index={i}/>)}</div><p id="no-results" class="empty-panel" hidden>没有符合条件的作品。试试减少筛选条件。</p>
+<div class="results-bar"><p id="count" role="status" aria-live="polite">{projects.length} 件作品</p></div><noscript><p>JavaScript 已关闭：以下展示完整档案，筛选需要 JavaScript。</p></noscript><div class="grid" id="results">{projects.map((p,i)=><Card project={p} index={i}/>)}</div><p id="no-results" class="empty-panel" hidden>没有匹配的作品。</p>
 <script>
 import {matches,compareProjects} from '../lib/filter.mjs';
 const form=document.querySelector<HTMLFormElement>('#filters')!;const grid=document.querySelector('#results')!;const cards=[...grid.querySelectorAll<HTMLElement>('[data-project]')];
