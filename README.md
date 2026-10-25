@@ -2,6 +2,21 @@
 
 一座持续生长的个人创作档案馆：收藏构想、过程、实验与完成的作品。
 
+## 一键打开网站（macOS）
+
+- 双击根目录的 **启动网站.command**：检查 Node.js、按需安装依赖、构建网站，再启动本机预览并打开默认浏览器。保持终端窗口打开，按 Ctrl+C 停止。若端口占用，预览会使用可用端口，浏览器打开实际地址。
+- 双击 **打开线上网站.command**：直接打开已部署的网站，不构建、不需要 Node.js。更新线上内容仍需正常提交和推送，脚本不会自动上传。
+
+本地生成需要 Node.js 24 LTS。脚本优先使用现有 pnpm，其次使用 Corepack 或 npm 临时运行 pnpm 10；不会修改全局 Git/Node 配置。依赖首次安装需要网络。此电脑若有 Codex 自带运行时，也会自动查找。启动脚本和 scripts 目录应保留在完整仓库中，不要只复制 command 文件。
+
+若 GitHub ZIP 下载后双击提示没有执行权限，在仓库目录运行：
+
+```sh
+chmod +x 启动网站.command 打开线上网站.command scripts/launch-site.sh
+```
+
+也可在任意终端执行 `bash scripts/launch-site.sh`；验证而不打开浏览器使用 `bash scripts/launch-site.sh --no-open`。本地 URL 使用 `site.config.mjs` 的 base（默认 `/personal-creative-archive/`）。若未来更换线上域名，需同步修改打开线上网站.command 中的地址。
+
 ## 本地运行
 
 需要 **Node.js 24 LTS**、pnpm 10。安装 Node 后：
